@@ -10,7 +10,9 @@ router.get('/', async (request, response) => {
 
     try {
         db = await database.getDb();
-        console.log(db.collection);
+        const col = db.collection;
+        const res = await col.find().toArray();
+        response.json(res);
     } catch (e) {
         return response.status(500).json({
             errors: {

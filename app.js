@@ -11,7 +11,7 @@ const database = require('./db/database');
 const index = require('./routes/index');
 const hello = require('./routes/hello');
 const list = require('./routes/list');
-const test = require('./routes/test');
+const docs = require('./routes/docs');
 
 app.use(cors());
 
@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 app.use('/', index);
 app.use('/hello', hello);
 app.use('/list', list);
-app.use('/test', test);
+app.use('/docs', docs);
 
 app.use(express.json());
 
