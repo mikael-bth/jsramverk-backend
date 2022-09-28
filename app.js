@@ -11,6 +11,7 @@ const hello = require('./routes/hello');
 const list = require('./routes/list');
 const docs = require('./routes/docs');
 const create = require('./routes/create');
+const update = require('./routes/update');
 
 app.use(cors());
 
@@ -31,6 +32,7 @@ app.use('/hello', hello);
 app.use('/list', list);
 app.use('/docs', docs);
 app.use('/create', create);
+app.use('/update', update);
 
 app.use(express.json());
 
