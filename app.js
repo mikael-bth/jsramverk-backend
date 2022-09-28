@@ -6,12 +6,11 @@ require('dotenv').config()
 const app = express();
 const port = 1337;
 
-const database = require('./db/database');
-
 const index = require('./routes/index');
 const hello = require('./routes/hello');
 const list = require('./routes/list');
 const docs = require('./routes/docs');
+const create = require('./routes/create');
 
 app.use(cors());
 
@@ -31,6 +30,7 @@ app.use('/', index);
 app.use('/hello', hello);
 app.use('/list', list);
 app.use('/docs', docs);
+app.use('/create', create);
 
 app.use(express.json());
 

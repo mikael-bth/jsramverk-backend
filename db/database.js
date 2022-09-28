@@ -3,7 +3,7 @@ const collectionName = "docs";
 
 const database = {
     getDb: async function getDb () {
-        let dsn = `mongodb+srv://${process.env.ATLAS_USERNAME}:${process.env.ATLAS_PASSWORD}@cluster0.glp35lj.mongodb.net/?retryWrites=true&w=majority`;
+        let dsn = `mongodb+srv://${process.env.ATLAS_USERNAME}:${process.env.ATLAS_PASSWORD}@cluster0.glp35lj.mongodb.net/docs?retryWrites=true&w=majority`;
 
         if (process.env.NODE_ENV === 'test') {
             dsn = `mongodb://localhost:27017/${collectionName}`;
