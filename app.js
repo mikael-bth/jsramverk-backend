@@ -10,6 +10,7 @@ const index = require('./routes/index');
 const hello = require('./routes/hello');
 const list = require('./routes/list');
 const docs = require('./routes/docs');
+const doc = require('./routes/doc');
 const create = require('./routes/create');
 const update = require('./routes/update');
 
@@ -31,6 +32,7 @@ app.use('/', index);
 app.use('/hello', hello);
 app.use('/list', list);
 app.use('/docs', docs);
+app.use('/doc', doc);
 app.use('/create', create);
 app.use('/update', update);
 
