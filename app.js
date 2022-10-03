@@ -4,7 +4,7 @@ const morgan = require('morgan');
 require('dotenv').config()
 
 const app = express();
-const port = 1337;
+const port = process.env.PORT || 1337;
 
 const index = require('./routes/index');
 const hello = require('./routes/hello');
