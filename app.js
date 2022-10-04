@@ -30,7 +30,6 @@ app.use((req, res, next) => {
 
 app.use('/', index);
 app.use('/hello', hello);
-app.use('/list', list);
 app.use('/docs', docs);
 app.use('/doc', doc);
 app.use('/create', create);
