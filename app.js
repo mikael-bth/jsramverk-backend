@@ -35,7 +35,7 @@ app.use('/docs', docs);
 app.use('/doc', doc);
 app.use('/create', create);
 app.use('/update', update);
-app.update('/test', test);
+app.use('/test', test);
 
 app.use(express.json());
 
