@@ -10,9 +10,9 @@ Appen använder sig av modulerna:
 
 Man kan installera modulerna genom att köra 'npm install'.
 
-Man startar appen i två lägen:
-För att starta i test läge som kör mot en lokal databas med 'npm start'.
-För att starta i production läga som kör mot en mongodb atlas databas med 'npm run production'.
+Man startar appen i två lägen:  
+För att starta i test läge som kör mot en lokal databas med 'npm start'.  
+För att starta i production läge som kör mot en mongodb atlas databas med 'npm run production'.
 
 Webappen använder 4 routes i koppling med docs databasen.
 - /docs - Visar alla dokument i databasen.
