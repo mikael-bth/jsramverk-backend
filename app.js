@@ -8,11 +8,11 @@ const port = process.env.PORT || 1337;
 
 const index = require('./routes/index');
 const hello = require('./routes/hello');
-const list = require('./routes/list');
 const docs = require('./routes/docs');
 const doc = require('./routes/doc');
 const create = require('./routes/create');
 const update = require('./routes/update');
+const test = require('./routes/test');
 
 app.use(cors());
 
@@ -35,6 +35,7 @@ app.use('/docs', docs);
 app.use('/doc', doc);
 app.use('/create', create);
 app.use('/update', update);
+app.update('/test', test);
 
 app.use(express.json());
 
