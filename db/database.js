@@ -10,7 +10,6 @@ const database = {
             if (process.env.NODE_ENV === 'test') {
                 dsn = 'mongodb://localhost:27017/test';
             }
-            console.log(process.env.NODE_ENV);
         }
 
         const client  = await mongo.connect(dsn, {

@@ -21,7 +21,7 @@ router.post('/', async (request, response) => {
         };
         const res = await col.insertOne(newDoc);
         if (res.acknowledged) {
-            return response.status(201).json({ data: res.insertedId });
+            return response.status(201).json({ data: "Created doc", id: res.insertedId });
         }
     } catch (e) {
         return response.status(500).json({
