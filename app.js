@@ -1,7 +1,8 @@
 const express = require("express");
 const cors = require('cors');
 const morgan = require('morgan');
-require('dotenv').config()
+
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 1337;
@@ -43,6 +44,7 @@ app.use(express.json());
 // Put this last
 app.use((req, res, next) => {
     var err = new Error("Not Found");
+
     err.status = 404;
     next(err);
 });

@@ -1,9 +1,9 @@
 "use strict";
 
 var express = require('express');
+var router = express.Router();
 const bodyParser = require('body-parser');
 
-var router = express.Router();
 router.use(bodyParser.json({ strict: false }));
 
 const database = require('./../db/database');
@@ -20,6 +20,7 @@ router.post('/', async (request, response) => {
             html: request.body.html
         };
         const res = await col.insertOne(newDoc);
+
         if (res.acknowledged) {
             return response.status(201).json({ data: "Created doc", id: res.insertedId });
         }

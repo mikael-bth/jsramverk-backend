@@ -13,8 +13,9 @@ router.get('/:name', async (request, response) => {
         const col = db.collection;
         const criteria = {
             name: request.params.name
-        }
+        };
         const res = await col.find(criteria).limit(1).toArray();
+
         response.json(res);
     } catch (e) {
         return response.status(500).json({

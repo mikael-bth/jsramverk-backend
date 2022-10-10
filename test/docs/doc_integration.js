@@ -1,3 +1,5 @@
+/* global it describe */
+
 process.env.NODE_ENV = 'test';
 
 const chai = require('chai');
@@ -38,7 +40,7 @@ describe('Docs', () => {
         it('201 SUCCESSFUL CREATED DOC', (done) => {
             chai.request(server)
                 .post("/create")
-                .send({name:'test', html:"test"})
+                .send({name: 'test', html: "test"})
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.body.data.should.be.a("string", "Created doc");
@@ -52,7 +54,7 @@ describe('Docs', () => {
         it('201 SUCCESSFUL UPDATED DOC', (done) => {
             chai.request(server)
                 .put("/update")
-                .send({name:'test', html:"test1"})
+                .send({name: 'test', html: "test1"})
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.body.data.should.be.a("string", "Updated: 1");

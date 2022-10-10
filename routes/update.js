@@ -1,9 +1,9 @@
 "use strict";
 
 var express = require('express');
+var router = express.Router();
 const bodyParser = require('body-parser');
 
-var router = express.Router();
 router.use(bodyParser.json({ strict: false }));
 
 const database = require('./../db/database');
@@ -14,12 +14,12 @@ router.put('/', async (request, response) => {
     try {
         db = await database.getDb();
         const col = db.collection;
-
         const updatedDoc = {
             name: request.body.name,
             html: request.body.html
-        }
-        const res = await col.updateOne({name: updatedDoc.name}, {$set:{html:updatedDoc.html}});
+        };
+        const res = await col.updateOne({name: updatedDoc.name}, {$set: {html: updatedDoc.html}});
+
         if (res.acknowledged) {
             return response.status(201).json({ data: `Updated: ${res.modifiedCount}` });
         }
