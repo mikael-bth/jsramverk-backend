@@ -9,7 +9,8 @@ const database = {
         if (process.env.NODE_ENV !== 'production') {
             dsn = `mongodb://localhost:27017/${collectionName}`;
             if (process.env.NODE_ENV === 'test') {
-                dsn = 'mongodb://localhost:27017/test';
+                dsn = `mongodb+srv://${process.env.ATLAS_USERNAME}:${process.env.ATLAS_PASSWORD}` +
+                '@cluster0.glp35lj.mongodb.net/test?retryWrites=true&w=majority';
             }
         }
 
