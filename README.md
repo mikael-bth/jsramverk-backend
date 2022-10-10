@@ -19,3 +19,4 @@ Webappen använder 4 routes i koppling med docs databasen.
 - /doc/:name - Visar dokumentet med det specifika namnet i databasen.
 - /create - Skapar ett nytt dokument i databasen. Dokumentets namn och html skickas med i bodyn av post requesten.
 - /update - Uppdaterar ett dokument i databasen. Dokumentets namn och html skickas med i bodyn av put requesten.
+- /reset - Återställer databasen genom att ta bort alla dokument sparade i den.
