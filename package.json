@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
+    "dbtest": "NODE_ENV='test' nodemon app.js",
+    "test": "nyc --reporter=html --reporter=text --reporter=clover mocha 'test/**/*.js' --timeout 10000",
     "production": "NODE_ENV='production' node app.js"
   },
   "author": "",
@@ -15,5 +17,11 @@
     "express": "^4.18.1",
     "mongodb": "^4.10.0",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.0.0",
+    "nyc": "^15.1.0"
   }
 }

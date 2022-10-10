@@ -12,7 +12,7 @@ const docs = require('./routes/docs');
 const doc = require('./routes/doc');
 const create = require('./routes/create');
 const update = require('./routes/update');
-const test = require('./routes/test');
+const reset = require('./routes/reset');
 
 app.use(cors());
 
@@ -34,12 +34,9 @@ app.use('/docs', docs);
 app.use('/doc', doc);
 app.use('/create', create);
 app.use('/update', update);
-app.use('/test', test);
+app.use('/reset', reset);
 
 app.use(express.json());
-
-// Start up server
-app.listen(port, () => console.log(`Example API listening on port ${port}!`));
 
 // Add routes for 404 and error handling
 // Catch 404 and forward to error handler
@@ -65,3 +62,8 @@ app.use((err, req, res, next) => {
         ]
     });
 });
+
+// Start up server
+const server = app.listen(port, () => console.log(`editor-backend listening on port ${port}!`));
+
+module.exports = server;
