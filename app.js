@@ -22,8 +22,7 @@ app.use(cors());
 const io = require("socket.io")(httpServer, {
     cors: {
         origin: '*',
-      //origin: `http://localhost:${port}`,
-      methods: ["GET", "POST"]
+        methods: ["GET", "POST"]
     }
 });
 
@@ -87,6 +86,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start up server
-const server = httpServer.listen(port, () => console.log(`editor-backend listening on port ${port}!`));
+const server = httpServer.listen(port, () =>
+    console.log(`editor-backend listening on port ${port}!`));
 
 module.exports = server;
