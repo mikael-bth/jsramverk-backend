@@ -23,7 +23,7 @@ const io = require("socket.io")(httpServer, {
     cors: {
         origin: '*',
       //origin: `http://localhost:${port}`,
-      methods: ["GET", "POST", "PUT"]
+      methods: ["GET", "POST"]
     }
 });
 
@@ -31,6 +31,10 @@ io.on('connection', (socket) => {
     console.log(socket.id);
     socket.on('create', function(room) {
         socket.join(room);
+    });
+
+    socket.on("doc", function (doc) {
+        socket.to(doc["_id"]).emit("doc", doc);
     });
 });
 
