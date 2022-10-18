@@ -7,6 +7,11 @@ Appen använder sig av modulerna:
 - Express
 - MongoDB
 - Morgan
+- Socket.io
+
+Optionella moduler:
+- Bufferutil
+- UTF-8-validate
 
 Man kan installera modulerna genom att köra 'npm install'.
 

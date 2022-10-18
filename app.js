@@ -7,6 +7,8 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 1337;
 
+const httpServer = require("http").createServer(app);
+
 const index = require('./routes/index');
 const hello = require('./routes/hello');
 const docs = require('./routes/docs');
@@ -16,6 +18,21 @@ const update = require('./routes/update');
 const reset = require('./routes/reset');
 
 app.use(cors());
+
+const io = require("socket.io")(httpServer, {
+    cors: {
+        origin: '*',
+      //origin: `http://localhost:${port}`,
+      methods: ["GET", "POST", "PUT"]
+    }
+});
+
+io.on('connection', (socket) => {
+    console.log(socket.id);
+    socket.on('create', function(room) {
+        socket.join(room);
+    });
+});
 
 // don't show the log when it is test
 if (process.env.NODE_ENV === 'production') {
@@ -66,6 +83,6 @@ app.use((err, req, res, next) => {
 });
 
 // Start up server
-const server = app.listen(port, () => console.log(`editor-backend listening on port ${port}!`));
+const server = httpServer.listen(port, () => console.log(`editor-backend listening on port ${port}!`));
 
 module.exports = server;
