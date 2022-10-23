@@ -5,7 +5,7 @@ var router = express.Router();
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 
-router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json({ strict: false }));
 
 const database = require('./../db/database');
 
@@ -27,12 +27,10 @@ router.post('/', async (request, response) => {
                 { message: "User with that username already registered" });
         }
 
-        bcrypt.hash(request.body.password, 10, function(err, hash) {
-            newUser.password = hash;
-        });
+        newUser.password = await bcrypt.hash(request.body.password, 10);
+        console.log(newUser);
 
         const res = await col.insertOne(newUser);
-
         if (res.acknowledged) {
             return response.status(201).json({ data: "Created user", id: res.insertedId });
         }

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dbtest": "NODE_ENV='test' nodemon app.js",
-    "test": "nyc --reporter=html --reporter=text --reporter=clover mocha 'test/**/*.js' --timeout 10000",
+    "test": "nyc --reporter=html --reporter=text --reporter=clover mocha 'test/**/*.js' --timeout 10000 --exit",
     "production": "NODE_ENV='production' node app.js",
     "eslint": "eslint ."
   },

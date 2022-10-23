@@ -5,7 +5,7 @@ var router = express.Router();
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 
-router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json({ strict: false }));
 
 const database = require('./../db/database');
 
@@ -27,13 +27,15 @@ router.post('/', async (request, response) => {
                 { message: "User with that username not registered" });
         }
 
+        console.log(request.body.password)
+
         bcrypt.compare(request.body.password, user[0].password, function (err, res) {
             if (!res) {
                 return response.status(401).json(
                     { message: "Incorrect password" });
             }
             return response.status(200).json(
-                { message: `${user[0].username} logged in`, id: user[0]["_id"]});
+                { data: `${user[0].username} logged in`, id: user[0]["_id"]});
         });
     } catch (e) {
         return response.status(500).json({
