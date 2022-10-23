@@ -8,12 +8,17 @@ router.use(bodyParser.json({ strict: false }));
 
 const database = require('./../db/database');
 
-router.put('/', async (request, response) => {
+router.put('/',
+    (req, res) => updateDoc(req, res)
+);
+
+async function updateDoc(request, response) {
     let db;
 
     try {
         db = await database.getDb();
         const col = db.collection;
+
         const updatedDoc = {
             name: request.body.name,
             html: request.body.html
@@ -35,6 +40,6 @@ router.put('/', async (request, response) => {
     } finally {
         await db.client.close();
     }
-});
+}
 
 module.exports = router;

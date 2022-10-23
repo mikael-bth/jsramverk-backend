@@ -28,7 +28,6 @@ router.post('/', async (request, response) => {
         }
 
         newUser.password = await bcrypt.hash(request.body.password, 10);
-        console.log(newUser);
 
         const res = await col.insertOne(newUser);
         if (res.acknowledged) {

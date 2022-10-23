@@ -10,6 +10,8 @@ chai.should();
 
 chai.use(chaiHttp);
 
+let token;
+
 describe('Docs', () => {
     describe('GET /reset', () => {
         it('201 SUCCESSFUL DB RESET', (done) => {
@@ -36,10 +38,40 @@ describe('Docs', () => {
         });
     });
 
+    describe('POST /register', () => {
+        it('201 SUCCESSFUL CREATED USER', (done) => {
+            chai.request(server)
+                .post("/register")
+                .send({username: 'test', password: "test"})
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    res.body.data.should.be.a("string", "Created user");
+                    res.body.should.have.property('id');
+                    done();
+                });
+        });
+    });
+
+    describe('POST /login', () => {
+        it('201 SUCCESSFUL LOGGED IN USER', (done) => {
+            chai.request(server)
+                .post("/login")
+                .send({username: 'test', password: "test"})
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.data.should.be.a("string", "test logged in");
+                    res.body.should.have.property('token');
+                    token = res.body.token;
+                    done();
+                });
+        });
+    });
+
     describe('POST /create', () => {
         it('201 SUCCESSFUL CREATED DOC', (done) => {
             chai.request(server)
                 .post("/create")
+                .set("x-access-token", token)
                 .send({name: 'test', html: "test"})
                 .end((err, res) => {
                     res.should.have.status(201);
@@ -67,6 +99,7 @@ describe('Docs', () => {
         it('200 SUCCESSFUL REQUEST', (done) => {
             chai.request(server)
                 .get("/doc/test")
+                .set("x-access-token", token)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body[0].name.should.be.a("string", "test");

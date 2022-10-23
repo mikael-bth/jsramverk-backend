@@ -28,8 +28,6 @@ router.post('/', async (request, response) => {
                 { message: "User with that username not registered" });
         }
 
-        console.log(request.body.password)
-
         bcrypt.compare(request.body.password, user[0].password, function (err, res) {
             if (!res) {
                 return response.status(401).json(

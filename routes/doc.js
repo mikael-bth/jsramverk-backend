@@ -2,23 +2,50 @@
 
 var express = require('express');
 var router = express.Router();
+const jwt = require('jsonwebtoken');
 
 const database = require('./../db/database');
 
-router.get('/:name', async (request, response) => {
+router.get('/:name',
+    (req, res, next) => verifyToken(req, res, next),
+    (req, res) => getDoc(req, res)
+);
+
+function verifyToken(req, res, next) {
+    const token = req.headers['x-access-token'];
+    const secret = process.env.JWT_SECRET;
+
+    jwt.verify(token, secret, function(err, decoded) {
+        if (err) {
+            return res.status(401).json(
+                { message: "Token no longer valid" });
+        }
+        req.user = decoded.username;
+        next();
+    });
+}
+
+async function getDoc(req, res) {
     let db;
 
     try {
         db = await database.getDb();
         const col = db.collection;
         const criteria = {
-            name: request.params.name
+            name: req.params.name
         };
-        const res = await col.find(criteria).limit(1).toArray();
+        const result = await col.find(criteria).limit(1).toArray();
 
-        response.json(res);
+        if (result[0].users.includes(req.user)) {
+            res.json(result);
+        } else {
+            return res.status(401).json(
+                { message: "You don't have access to this document" });
+        }
+
+        
     } catch (e) {
-        return response.status(500).json({
+        return res.status(500).json({
             errors: {
                 status: 500,
                 source: "/",
@@ -29,6 +56,6 @@ router.get('/:name', async (request, response) => {
     } finally {
         await db.client.close();
     }
-});
+}
 
 module.exports = router;
