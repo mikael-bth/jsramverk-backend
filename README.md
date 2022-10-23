@@ -8,6 +8,7 @@ Appen använder sig av modulerna:
 - MongoDB
 - Morgan
 - Socket.io
+- Bcryptjs
 
 Optionella moduler:
 - Bufferutil

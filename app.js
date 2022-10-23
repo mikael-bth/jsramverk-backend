@@ -16,6 +16,8 @@ const doc = require('./routes/doc');
 const create = require('./routes/create');
 const update = require('./routes/update');
 const reset = require('./routes/reset');
+const register = require('./routes/register');
+const login = require('./routes/login');
 
 app.use(cors());
 
@@ -56,6 +58,8 @@ app.use('/doc', doc);
 app.use('/create', create);
 app.use('/update', update);
 app.use('/reset', reset);
+app.use('/register', register);
+app.use('/login', login);
 
 app.use(express.json());
 

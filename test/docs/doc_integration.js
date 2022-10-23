@@ -96,7 +96,7 @@ describe('Docs', () => {
                 .get("/reset")
                 .end((err, res) => {
                     res.should.have.status(201);
-                    res.body.data.should.be.a("string", "DB RESET. 1 doc/s removed");
+                    res.body.data.should.be.a("string", "DB RESET. 1 doc/s removed. 0 user/s removed");
                     done();
                 });
         });
