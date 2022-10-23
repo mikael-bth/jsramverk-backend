@@ -9,6 +9,7 @@ Appen använder sig av modulerna:
 - Morgan
 - Socket.io
 - Bcryptjs
+- JsonWebToken
 
 Optionella moduler:
 - Bufferutil

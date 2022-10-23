@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 router.use(bodyParser.json({ strict: false }));
 
@@ -34,8 +35,13 @@ router.post('/', async (request, response) => {
                 return response.status(401).json(
                     { message: "Incorrect password" });
             }
+            
+            const payload = { username: user[0].username};
+            const secret = process.env.JWT_SECRET;
+            const token = jwt.sign(payload, secret, {expiresIn: '1h'});
+            
             return response.status(200).json(
-                { data: `${user[0].username} logged in`, id: user[0]["_id"]});
+                { data: `${user[0].username} logged in`, token: token });
         });
     } catch (e) {
         return response.status(500).json({
