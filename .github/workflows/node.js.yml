@@ -23,6 +23,8 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+      env:
+        JWT_SECRET: BTBYfFuTCepjxiagBYv2g06KPSvFdQqr1vXHAlMeqFRn3smTnqOBgzsXMDuhbcPI
 
     - name: Start MongoDB
       uses: supercharge/mongodb-github-action@1.7.0
