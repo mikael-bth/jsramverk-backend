@@ -19,6 +19,7 @@ const reset = require('./routes/reset');
 const register = require('./routes/register');
 const login = require('./routes/login');
 const verify = require('./routes/verify');
+const updatePermission = require('./routes/updatePermission');
 
 app.use(cors());
 
@@ -62,6 +63,7 @@ app.use('/reset', reset);
 app.use('/register', register);
 app.use('/login', login);
 app.use('/verify', verify);
+app.use('/updatepermission', updatePermission);
 
 app.use(express.json());
 
