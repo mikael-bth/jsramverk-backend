@@ -29,5 +29,10 @@ jobs:
       with:
         mongodb-version: ${{ matrix.mongodb-version }}
 
+    - name: create env file
+      run: |
+        touch .env
+        echo JWT_SECRET=BTBYfFuTCepjxiagBYv2g06KPSvFdQqr1vXHAlMeqFRn3smTnqOBgzsXMDuhbcPI >> .env
+
     - run: npm install
     - run: npm test
