@@ -18,7 +18,8 @@ router.get('/', async (request, response) => {
         const usersRes = await usersCol.deleteMany();
 
         response.status(201).json(
-            { data: `DB RESET. ${docsRes.deletedCount} doc/s removed. ${usersRes.deletedCount} user/s removed.`});
+            { data: `DB RESET. ${docsRes.deletedCount} doc/s removed.`
+            + ` ${usersRes.deletedCount} user/s removed.`});
     } catch (e) {
         return response.status(500).json({
             errors: {

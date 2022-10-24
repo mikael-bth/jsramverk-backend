@@ -42,8 +42,6 @@ async function getDoc(req, res) {
             return res.status(401).json(
                 { message: "You don't have access to this document" });
         }
-
-        
     } catch (e) {
         return res.status(500).json({
             errors: {

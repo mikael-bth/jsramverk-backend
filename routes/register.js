@@ -30,6 +30,7 @@ router.post('/', async (request, response) => {
         newUser.password = await bcrypt.hash(request.body.password, 10);
 
         const res = await col.insertOne(newUser);
+
         if (res.acknowledged) {
             return response.status(201).json({ data: "Created user", id: res.insertedId });
         }

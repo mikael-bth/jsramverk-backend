@@ -24,7 +24,8 @@ async function updatePermission(request, response) {
             user: request.body.user
         };
 
-        let res
+        let res;
+
         if (request.body.method === "add") {
             res = await col.updateOne({name: updatedDoc.name}, {$push: {users: updatedDoc.user}});
         } else {

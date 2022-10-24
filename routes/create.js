@@ -43,7 +43,8 @@ async function createDoc(req, res) {
         const result = await col.insertOne(newDoc);
 
         if (result.acknowledged) {
-            return res.status(201).json({ data: "Created doc", id: result.insertedId, user: req.user });
+            return res.status(201).json({ data: "Created doc",
+                id: result.insertedId, user: req.user });
         }
     } catch (e) {
         return res.status(500).json({
