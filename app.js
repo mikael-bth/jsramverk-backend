@@ -20,6 +20,7 @@ const register = require('./routes/register');
 const login = require('./routes/login');
 const verify = require('./routes/verify');
 const updatePermission = require('./routes/updatePermission');
+const graphql = require('./routes/graphql');
 
 app.use(cors());
 
@@ -64,6 +65,7 @@ app.use('/register', register);
 app.use('/login', login);
 app.use('/verify', verify);
 app.use('/updatepermission', updatePermission);
+app.use('/graphql', graphql);
 
 app.use(express.json());
 

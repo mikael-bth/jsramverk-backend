@@ -10,6 +10,8 @@ Appen använder sig av modulerna:
 - Socket.io
 - Bcryptjs
 - JsonWebToken
+- graphql
+- express-graphql
 
 Optionella moduler:
 - Bufferutil
@@ -31,3 +33,4 @@ Webappen använder 9 routes i koppling med databasen.
 - /verify - Testar användarens jwt token
 - /updatepermission - Uppdaterar vilka användare som har tillåtelse till ett dokument
 - /reset - Återställer databasen genom att ta bort alla dokument och användare sparade i den.
+- graphql - Använd graphql för att söka i databasen.

@@ -44,7 +44,7 @@ async function createDoc(req, res) {
 
         if (result.acknowledged) {
             return res.status(201).json({ data: "Created doc",
-                id: result.insertedId, user: req.user });
+                id: result.insertedId });
         }
     } catch (e) {
         return res.status(500).json({
