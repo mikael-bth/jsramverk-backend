@@ -13,6 +13,6 @@ const UserType = new GraphQLObjectType({
         username: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
     })
-})
+});
 
 module.exports = UserType;

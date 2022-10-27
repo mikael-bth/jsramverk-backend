@@ -15,6 +15,6 @@ const DocType = new GraphQLObjectType({
         html: { type: new GraphQLNonNull(GraphQLString) },
         users: { type: new GraphQLList(GraphQLString) }
     })
-})
+});
 
 module.exports = DocType;

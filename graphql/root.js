@@ -72,7 +72,7 @@ async function getData(collection = "docs", res = undefined) {
 
         return res.json({
             data: result
-        })
+        });
     } catch (e) {
         return res.json({
             errors: {
@@ -87,7 +87,7 @@ async function getData(collection = "docs", res = undefined) {
     }
 
     function hidePassword(user, index, array) {
-        array[index].password = "********"
+        array[index].password = "********";
     }
 }
 
