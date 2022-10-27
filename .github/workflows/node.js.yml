@@ -34,5 +34,5 @@ jobs:
         touch .env
         echo JWT_SECRET=BTBYfFuTCepjxiagBYv2g06KPSvFdQqr1vXHAlMeqFRn3smTnqOBgzsXMDuhbcPI >> .env
 
-    - run: npm install
+    - run: npm install --legacy-peer-deps
     - run: npm test
