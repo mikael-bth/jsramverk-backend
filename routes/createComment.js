@@ -11,7 +11,7 @@ const database = require('./../db/database');
 
 router.post('/',
     (req, res, next) => verifyToken(req, res, next),
-    (req, res) => createDoc(req, res)
+    (req, res) => createComment(req, res)
 );
 
 function verifyToken(req, res, next) {
@@ -28,32 +28,20 @@ function verifyToken(req, res, next) {
     });
 }
 
-async function createDoc(req, res) {
+async function createComment(req, res) {
     let db;
 
     try {
-        db = await database.getDb();
-        let col = db.collection;
-
-        const newDoc = {
-            name: req.body.name,
-            html: req.body.html,
-            users: [req.user]
-        };
-        const result = await col.insertOne(newDoc);
-
         db = await database.getDb("comments");
-        col = db.collection;
-        const comments = {
-            name: req.body.name,
-            comments: []
-        }
+        const col = db.collection;
 
-        await col.insertOne(comments);
+        const docName = req.body.name;
+        const newComment = req.body.comment;
+        newComment.author = req.user;
+        const result = await col.updateOne({name: docName}, {$push: {comments: newComment}});
 
         if (result.acknowledged) {
-            return res.status(201).json({ data: "Created doc",
-                id: result.insertedId });
+            return res.status(201).json({ data: "Added comment to document" });
         }
     } catch (e) {
         return res.status(500).json({

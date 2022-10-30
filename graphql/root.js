@@ -6,6 +6,8 @@ const {
 
 const DocType = require('./doc');
 const UserType = require('./user');
+const CommentsType = require('./comments');
+const CommentType = require('./comment');
 
 const database = require('./../db/database');
 
@@ -51,6 +53,40 @@ const RootQueryType = new GraphQLObjectType({
                 return await getData("users");
             }
         },
+        comment: {
+            type: CommentType,
+            description: 'A single comment',
+            args: {
+                docName: { type: GraphQLString },
+                line: { type: GraphQLString }
+            },
+            resolve: async function(parent, args) {
+                const commentArray = await getData("comments");
+
+                const comments = commentArray.find(comments => comments.name === args.docName);
+                const comment = comments.find(comment => comment.line === args.line);
+                return comment;
+            }
+        },
+        documentComments: {
+            type: CommentsType,
+            description: 'List of a documents comments',
+            args: {
+                docName: { type: GraphQLString }
+            },
+            resolve: async function(parent, args) {
+                const commentArray = await getData("comments");
+
+                return commentArray.find(comments => comments.name === args.docName);
+            }
+        },
+        allComments: {
+            type: new GraphQLList(CommentsType),
+            description: 'List of all documents comments',
+            resolve: async function() {
+                return await getData("comments");
+            }
+        }
     })
 });
 
