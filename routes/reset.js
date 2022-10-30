@@ -17,9 +17,14 @@ router.get('/', async (request, response) => {
         const usersCol = db.collection;
         const usersRes = await usersCol.deleteMany();
 
+        db = await database.getDb("comments");
+        const commentsCol = db.collection;
+        const commentsRes = await commentsCol.deleteMany();
+
         response.status(201).json(
             { data: `DB RESET. ${docsRes.deletedCount} doc/s removed.`
-            + ` ${usersRes.deletedCount} user/s removed.`});
+            + ` ${usersRes.deletedCount} user/s removed.`
+            + ` ${commentsRes.deletedCount} doc/s comments removed.`});
     } catch (e) {
         return response.status(500).json({
             errors: {
