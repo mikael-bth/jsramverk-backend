@@ -62,9 +62,9 @@ const RootQueryType = new GraphQLObjectType({
             },
             resolve: async function(parent, args) {
                 const commentArray = await getData("comments");
-
                 const comments = commentArray.find(comments => comments.name === args.docName);
                 const comment = comments.find(comment => comment.line === args.line);
+
                 return comment;
             }
         },

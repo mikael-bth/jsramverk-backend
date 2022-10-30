@@ -110,6 +110,91 @@ describe('Docs', () => {
         });
     });
 
+    describe('POST /createcomment', () => {
+        it('201 SUCCESSFUL CREATED COMMENT', (done) => {
+            chai.request(server)
+                .post("/createcomment")
+                .send({name: 'test', comment: {
+                    line: "1",
+                    comment: "test"
+                }})
+                .set("x-access-token", token)
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    res.body.data.should.be.a("string", "Added comment to document");
+                    done();
+                });
+        });
+    });
+
+    describe('POST /graphql', () => {
+        it('200 SUCCESSFUL GOT COMMENT', (done) => {
+            const query = `{ documentComments(docName: "test") {
+                name,
+                comments {
+                    line,
+                    comment,
+                    author
+                }
+            }}`;
+
+            chai.request(server)
+                .post("/graphql")
+                .send({query: query})
+                .set("Content-Type", 'application/json')
+                .set("Accept", 'application/json')
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    const data = res.body.data.documentComments;
+
+                    data.name.should.be.a("string", "test");
+                    data.comments[0].line.should.be.a("string", "1");
+                    data.comments[0].comment.should.be.a("string", "test");
+                    data.comments[0].author.should.be.a("string", "test");
+                    done();
+                });
+        });
+    });
+
+    describe('POST /removecomment', () => {
+        it('201 SUCCESSFUL REMOVED COMMENT', (done) => {
+            chai.request(server)
+                .post("/removecomment")
+                .send({name: 'test', index: "0", line: "1"})
+                .set("x-access-token", token)
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    res.body.data.should.be.a("string", "Removed comment from document");
+                    done();
+                });
+        });
+    });
+
+    describe('POST /graphql', () => {
+        it('200 SUCCESSFUL GOT NO COMMENT', (done) => {
+            const query = `{ documentComments(docName: "test") {
+                name,
+                comments {
+                    line,
+                    comment,
+                    author
+                }
+            }}`;
+
+            chai.request(server)
+                .post("/graphql")
+                .send({query: query})
+                .set("Content-Type", 'application/json')
+                .set("Accept", 'application/json')
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.data.documentComments.name.should.be.a("string", "test");
+                    res.body.data.documentComments.comments.should.have.lengthOf(0);
+                    done();
+                });
+        });
+    });
+
     describe('GET BAD ROUTE', () => {
         it('404 UNSUCCESSFUL REQUEST', (done) => {
             chai.request(server)

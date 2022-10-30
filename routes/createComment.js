@@ -34,9 +34,9 @@ async function createComment(req, res) {
     try {
         db = await database.getDb("comments");
         const col = db.collection;
-
         const docName = req.body.name;
         const newComment = req.body.comment;
+
         newComment.author = req.user;
         const result = await col.updateOne({name: docName}, {$push: {comments: newComment}});
 

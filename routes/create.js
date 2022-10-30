@@ -44,10 +44,11 @@ async function createDoc(req, res) {
 
         db = await database.getDb("comments");
         col = db.collection;
+
         const comments = {
             name: req.body.name,
             comments: []
-        }
+        };
 
         await col.insertOne(comments);
 

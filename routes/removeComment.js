@@ -44,6 +44,7 @@ async function removeComment(req, res) {
 
         let indexCount = 0;
         let lineCount = 0;
+
         for (const comment of updatedComments) {
             if (comment.line === line) {
                 if (lineCount === index) {
@@ -53,7 +54,7 @@ async function removeComment(req, res) {
                 lineCount++;
             }
             indexCount++;
-        };
+        }
 
         result = await col.updateOne({name: docName}, {$set: {comments: updatedComments}});
 
